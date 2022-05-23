@@ -39,7 +39,6 @@ export default class PureComponent {
 
   protected createElement(tagName: string, options?: ElementCreationOptions) {
     const el = createElement(tagName, options);
-    console.log(el, this.defaultClassName);
     el.classList.add(this.defaultClassName);
     return el;
   }
