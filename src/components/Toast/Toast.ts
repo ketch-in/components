@@ -1,19 +1,19 @@
 import MomentComponent, { MomentComponentProps } from "@/core/MomentComponent";
 
 export interface ToastComponentProps extends MomentComponentProps {
-  text: string;
+  children: HTMLElement;
   onClick?: (item: ToastComponent) => void;
   onClose?: (item: ToastComponent, action: boolean) => number | void;
 }
 
 export default class ToastComponent extends MomentComponent {
-  private text: string;
+  private children: HTMLElement;
 
   private onClick: (item: ToastComponent) => void;
   private onClose: (action: boolean) => number | void;
 
   constructor({
-    text,
+    children,
     data = {},
     removeDelay = 2000,
     momentDelay = 2000,
@@ -22,7 +22,7 @@ export default class ToastComponent extends MomentComponent {
   }: ToastComponentProps) {
     super({ removeDelay, momentDelay, data, defaultClassName: "toast" });
 
-    this.text = text;
+    this.children = children;
 
     this.onClick = onClick;
     this.onClose = (action) => onClose(this, action);
@@ -31,17 +31,17 @@ export default class ToastComponent extends MomentComponent {
   mount(target: HTMLElement) {
     const element = this.getElement();
 
-    const textEl = this.createElement("p");
+    const bodyEl = this.createElement("div");
     const closeEl = this.createElement("span");
 
-    textEl.innerText = this.text;
+    bodyEl.append(this.children);
     /** TODO : 닫기 아이콘으로 변경 예정 */
     closeEl.innerText = "닫기";
 
-    textEl.classList.add("text");
+    bodyEl.classList.add("text");
     closeEl.classList.add("close");
 
-    element.appendChild(textEl);
+    element.appendChild(bodyEl);
     element.appendChild(closeEl);
 
     element.onclick = (e: MouseEvent) => {

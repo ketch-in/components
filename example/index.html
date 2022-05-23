@@ -24,16 +24,18 @@
 
       for (let i = 1; i < 10; i++) {
         setTimeout(() => {
+          const p = document.createElement("p");
+          p.innerText = `Toast ${i} TEST`;
           toastController.add({
-            text: `Toast ${i} TEST`,
+            children: p,
             data: { i },
             momentDelay: 3000,
             onClick: (item) => {
               item.unmount(true);
               console.log(item.getData());
             },
-            onClose: (action) => {
-              console.log("456", i, action);
+            onClose: (item, action) => {
+              console.log("456", i, item, action);
             },
           });
         }, i * 100);
