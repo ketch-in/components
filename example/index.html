@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="./ketch-in-components.umd.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      const root = document.querySelector("#app");
+      const { ToastController, SelectModalController, ModalController } =
+        window.ketchInComponents;
+      const toastController = new ToastController(root, { removeDelay: 2000 });
+      const selectController = new SelectModalController(root, {
+        removeDelay: 2000,
+      });
+      const modalController = new ModalController(root, {
+        removeDelay: 2000,
+      });
+
+      for (let i = 1; i < 10; i++) {
+        setTimeout(() => {
+          const p = document.createElement("p");
+          p.innerText = `Toast ${i} TEST`;
+          toastController.add({
+            children: p,
+            data: { i },
+            momentDelay: 3000,
+            onClick: (item) => {
+              item.unmount(true);
+              console.log(item.getData());
+            },
+            onClose: (item, action) => {
+              console.log("456", i, item, action);
+            },
+          });
+        }, i * 100);
+      }
+      for (let i = 1; i < 3; i++) {
+        setTimeout(() => {
+          const p = document.createElement("p");
+          p.innerText = `SelectModal TEST (${i})`;
+          selectController.add({
+            children: p,
+            buttons: { yes: "확인", no: "취소" },
+            onClick: (item, id, label) => {
+              console.log(item, id, label);
+              item.mount(document.body);
+            },
+          });
+        }, i * 1000);
+      }
+
+      for (let i = 1; i < 3; i++) {
+        setTimeout(() => {
+          const p = document.createElement("p");
+          p.innerText = `Modal (${i})`;
+          modalController.add({
+            children: p,
+            onClose: (item) => {
+              console.log(item);
+              item.mount(document.body);
+            },
+          });
+        }, i * 1000);
+      }
+    </script>
+  </body>
+</html>

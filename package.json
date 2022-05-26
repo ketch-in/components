@@ -2,11 +2,10 @@
   "name": "ketch-in-components",
   "version": "1.0.0",
   "description": "components for ketch-in",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack serve",
-    "build": "webapck -w"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
   "repository": {
     "type": "git",
@@ -19,19 +18,13 @@
   },
   "homepage": "https://github.com/ketch-in/ketch-in-components#readme",
   "devDependencies": {
-    "@babel/core": "^7.17.10",
-    "@babel/preset-env": "^7.17.10",
     "@typescript-eslint/eslint-plugin": "^5.21.0",
     "@typescript-eslint/parser": "^5.21.0",
-    "css-loader": "^6.7.1",
     "eslint": "^8.14.0",
-    "html-webpack-plugin": "^5.5.0",
-    "mini-css-extract-plugin": "^2.6.0",
-    "style-loader": "^3.3.1",
-    "ts-loader": "^9.3.0",
-    "typescript": "^4.6.4",
-    "webpack": "^5.72.0",
-    "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.9.0"
+    "less": "^4.1.2",
+    "sass": "^1.52.1",
+    "stylus": "^0.57.0",
+    "typescript": "^4.5.4",
+    "vite": "^2.9.9"
   }
 }
