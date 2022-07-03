@@ -1,10 +1,11 @@
-import PureComponent, {PureComponentProps} from "@/core/PureComponent";
+import PureComponent, { PureComponentProps } from "@/core/PureComponent";
+import ColorPaletteController from "@/layers/color-palette";
 
 export interface ToolbarComponentProps extends PureComponentProps {
   status: string; // TODO: status type 설정
   handlePen: () => void;
   handleShape: () => void;
-  handleColor: () => void;
+  handleColor: (selectedColor: string) => void;
   onClear: () => void;
 }
 
@@ -12,7 +13,7 @@ export default class ToolbarComponent extends PureComponent {
   private status: string;
   private handlePen: () => void;
   private handleShape: () => void;
-  private handleColor: () => void;
+  private handleColor: (selectedColor: string) => void;
   private onClear: () => void;
 
   constructor({
@@ -37,7 +38,7 @@ export default class ToolbarComponent extends PureComponent {
     const status = this.createElement('span');
     const pen = this.createElement('button');
     const shape = this.createElement('button');
-    const palette = this.createElement('button');
+    const palette = this.createElement('span');
     const clear = this.createElement('button');
     /* TODO: 
     - status socket에서 받은 값 연결
@@ -56,9 +57,9 @@ export default class ToolbarComponent extends PureComponent {
     shape.innerText = 'SHAPE_COMP';
     shape.classList.add('select_shape');
     
-    palette.innerText = 'PALETTE';
     palette.classList.add('palette');
-
+    palette.innerText = '[PALETTE]';
+    
     clear.innerText = 'CLEAR_ALL';
     clear.classList.add('btn_clear')
 
@@ -71,7 +72,17 @@ export default class ToolbarComponent extends PureComponent {
 
     pen.onclick = this.handlePen;
     shape.onclick = this.handleShape;
-    palette.onclick = this.handleColor;
+    const colorPaletteController = new ColorPaletteController(palette, {});
+    palette.onclick = () => {
+      if (!palette.children.length) {
+        
+        colorPaletteController.add({
+          onColorSelect: (selectedColor: string) => this.handleColor(selectedColor),
+        });
+      } else {
+        colorPaletteController.close();
+      }
+    };
     clear.onclick = this.onClear;
 
     return super.mount(target);
