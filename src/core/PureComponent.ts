@@ -43,6 +43,15 @@ export default class PureComponent {
     return el;
   }
 
+  protected createSVGElement(width: number, height: number) {
+    const xmlns = "http://www.w3.org/2000/svg";
+    const el = document.createElementNS(xmlns, 'svg');
+    el.setAttribute('width', width.toString());
+    el.setAttribute('height', height.toString());
+    el.classList.add(this.defaultClassName);
+    return el;
+  }
+
   getData() {
     return this.data;
   }

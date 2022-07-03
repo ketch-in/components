@@ -17,28 +17,31 @@ export default class ColorPaletteLayer extends PureComponent {
 
   mount(target: HTMLElement) {
     const targetEl = this.getElement();
-    const wrapper = this.createElement('div');
-    const list = this.createElement('ul');
+    const wrapperList = this.createElement('ul');
 
     COLOR_LIST.map(color => {
       const item = this.createElement('li');
-      const colorBtn = this.createElement('div');
+      const colorBtn = this.createElement('label');
 
-      colorBtn.innerText = `[${color}]`;
+      // TODO: 추후 css 처리
+      colorBtn.style.width = '27px';
+      colorBtn.style.height = '27px';
+      colorBtn.style.display = 'inline-block'
+      
+      colorBtn.classList.add('color-unit');
       colorBtn.dataset.color = color;
+      colorBtn.style.backgroundColor = color;
 
       item.classList.add(`btn-${color}`);
       item.appendChild(colorBtn);
       
-      list.appendChild(item);
+      wrapperList.appendChild(item);
     });
 
-    wrapper.classList.add('wrapper');
+    wrapperList.classList.add('wrapper');
+    targetEl.appendChild(wrapperList);
 
-    wrapper.appendChild(list);
-    targetEl.appendChild(wrapper);
-
-    list.onclick = (e: MouseEvent) => {
+    wrapperList.onclick = (e: MouseEvent) => {
       const eTarget = e.target as HTMLElement;
       if (eTarget.closest('li')) {
         const curColor = eTarget.dataset.color;
@@ -47,12 +50,13 @@ export default class ColorPaletteLayer extends PureComponent {
     }
 
     document.querySelector('.toolbar')?.addEventListener('click', 
-    e => {
-      const eTarget = e.target as HTMLElement;
-      if (!eTarget.contains(targetEl)) {
-        this.unmount().then(this.closeLayer);
+      e => {
+        const eTarget = e.target as HTMLElement;
+        if (!eTarget.contains(targetEl)) {
+          this.unmount().then(this.onClose);
+        }
       }
-    });
+    );
 
     return super.mount(target);
   }
@@ -61,7 +65,7 @@ export default class ColorPaletteLayer extends PureComponent {
     this.unmount();
   }
   
-  closeLayer() {
+  onClose() {
     document.body.onclick = null;
   }
 }

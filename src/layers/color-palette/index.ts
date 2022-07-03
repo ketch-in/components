@@ -7,7 +7,7 @@ export default class ColorPaletteController extends PureController {
     super(targetEl, options, true);
   }
 
-  add(props: ColorPaletteLayerProps) {
+  open(props: ColorPaletteLayerProps) {
     this.layer = new ColorPaletteLayer({...props, removeDelay: 0})
     if (this.layer instanceof ColorPaletteLayer) {
       return this.layer.mount(this.target);

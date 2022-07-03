@@ -1,10 +1,12 @@
 import PureComponent, { PureComponentProps } from "@/core/PureComponent";
 import ColorPaletteController from "@/layers/color-palette";
+import ShapeListController from "@/layers/shape-list";
+import { Shape } from "@/layers/shape-list/ShapeList";
 
 export interface ToolbarComponentProps extends PureComponentProps {
   status: string; // TODO: status type 설정
   handlePen: () => void;
-  handleShape: () => void;
+  handleShape: (selectedShape: Shape) => void;
   handleColor: (selectedColor: string) => void;
   onClear: () => void;
 }
@@ -12,7 +14,7 @@ export interface ToolbarComponentProps extends PureComponentProps {
 export default class ToolbarComponent extends PureComponent {
   private status: string;
   private handlePen: () => void;
-  private handleShape: () => void;
+  private handleShape: (selectedShape: Shape) => void;
   private handleColor: (selectedColor: string) => void;
   private onClear: () => void;
 
@@ -37,9 +39,13 @@ export default class ToolbarComponent extends PureComponent {
     const wrapper = this.createElement('div');
     const status = this.createElement('span');
     const pen = this.createElement('button');
-    const shape = this.createElement('button');
+    const shape = this.createElement('span');
     const palette = this.createElement('span');
     const clear = this.createElement('button');
+
+    const shapeListController = new ShapeListController(shape, {});
+    const colorPaletteController = new ColorPaletteController(palette, {});
+
     /* TODO: 
     - status socket에서 받은 값 연결
     - pen, clear, shape: 아이콘 적용
@@ -54,7 +60,7 @@ export default class ToolbarComponent extends PureComponent {
     pen.innerText = 'PEN';
     pen.classList.add('btn_pen');
     
-    shape.innerText = 'SHAPE_COMP';
+    shape.innerText = '[SHAPE_LIST]';
     shape.classList.add('select_shape');
     
     palette.classList.add('palette');
@@ -71,12 +77,20 @@ export default class ToolbarComponent extends PureComponent {
     targetEl.appendChild(wrapper);
 
     pen.onclick = this.handlePen;
-    shape.onclick = this.handleShape;
-    const colorPaletteController = new ColorPaletteController(palette, {});
+    
+    shape.onclick = () => {
+      if (!shape.children.length) {
+        shapeListController.open({
+          onShapeSelect: (selectedShape: Shape) => this.handleShape(selectedShape),
+        });
+      } else {
+        shapeListController.close();
+      }
+    }
+
     palette.onclick = () => {
       if (!palette.children.length) {
-        
-        colorPaletteController.add({
+        colorPaletteController.open({
           onColorSelect: (selectedColor: string) => this.handleColor(selectedColor),
         });
       } else {
