@@ -1,4 +1,4 @@
-/* 스타일 적용 전 */
+/* app style */
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -6,6 +6,19 @@
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+/* toast container style */
+#toast {
+  position: absolute;
+  left: 50%;
+  /* 구글밋 탑 툴바에서 방해가 되지 않는 위치  */
+  top: 50px;
+  transform: translateX(-50%);
+  z-index: 700;
+  display: flex;
+  flex-direction: column-reverse;
+  flex-wrap: wrap;
 }
 
 .ketch-in-components {
@@ -22,6 +35,24 @@
   padding: 0;
 }
 
+.ketch-in-components li {
+  list-style: none;
+}
+
+.ketch-in-components button {
+  background: transparent;
+  justify-content: center;
+  outline: none;
+  border: none;
+}
+
+.ketch-in-components svg {
+  width: 23px;
+  height: 32px;
+  background: transparent;
+  fill: #fff;
+}
+
 /* 모달 출력시 오버레이 */
 .ketch-in-components.overlay {
   background-color: rgba(32,33,36,0.6);
@@ -33,6 +64,7 @@
   height: 100vh;
 }
 
+/* modal */
 .ketch-in-components.container {
   /* position: absolute; */
   position:relative;
@@ -59,6 +91,87 @@
   line-height: 24px;
 }
 
+/* 토스트 */
+@keyframes fadein {
+  from {margin-top: -80px; opacity: 0;}
+  to {margin-top: 0; opacity: 1;}
+}
+
+.ketch-in-components.toast.container {
+  flex: 1 1 100%;
+  animation: fadein 0.5s;
+  background: #333;
+}
+
+.ketch-in-components.toast.unmount {
+  opacity: 0;
+  margin-top: 80px;
+  transition-property: margin-top, opacity;
+  transition-duration: 0.5s;
+  transition-timing-function: ease-out;
+}
+
+.ketch-in-components.toast.body, .ketch-in-components.toast.text {
+  color: #fff;
+}
+
+.ketch-in-components.toast.close:after {
+  background-image: url(https://www.gstatic.com/images/icons/material/system/1x/close_white_24dp.png);
+}
+
+/* 툴바 */
+.ketch-in-components.toolbar.container {
+  border-radius: 4px;
+  background: #333;
+  color: #fff;
+  position: absolute;
+  z-index: 600;
+  padding: 12px;
+  min-height: 0;
+  flex-direction: inherit;
+  align-items: center;
+  /* 임시 */
+  top: 100px;
+  left: 100px;
+}
+
+.ketch-in-components.toolbar.status {
+  display: inline-block;
+  margin-right: 24px;
+  color: #fff;
+  cursor: move;
+}
+
+.ketch-in-components.toolbar.btn_pen {
+  display: inline-block;
+  margin-right: 12px;
+}
+
+.ketch-in-components.toolbar.select_shape {
+  display: inline-block;
+  margin-right: 12px;
+}
+.ketch-in-components.toolbar.select_shape > .container {
+  position: absolute;
+  margin-top: 12px;
+  margin-left: -100px;
+}
+
+.ketch-in-components.toolbar.palette {
+  display: inline-block;
+  margin-right: 12px;
+}
+.ketch-in-components.toolbar.palette > .container {
+  position: absolute;
+  margin-top: 12px;
+  margin-left: -100px;
+}
+
+.ketch-in-components.toolbar.btn_clear {
+  display: inline-block;
+}
+
+/* 공통 닫기 버튼 */
 .ketch-in-components.close {
   height: 20px;
   opacity: .71;
@@ -86,12 +199,10 @@
   background-size: 24px;
 }
 
+/* 액션 버튼 */
 .ketch-in-components.btn {
   align-items: center;
-  border: none;
   display: inline-flex;
-  justify-content: center;
-  outline: none;
   position: relative;
   z-index: 0;
   -webkit-font-smoothing: antialiased;
