@@ -2,7 +2,7 @@ export interface PureControllerOptions {
   removeDelay?: number;
 }
 
-const DEFALT_PURE_CONTROLLER_OPTIONS: PureControllerOptions = {
+const DEFAULT_PURE_CONTROLLER_OPTIONS: PureControllerOptions = {
   removeDelay: 2000,
 };
 
@@ -10,13 +10,13 @@ export default class PureController {
   protected target: HTMLElement;
   private options: PureControllerOptions;
 
-  constructor(targetEl: Element, options?: PureControllerOptions) {
+  constructor(targetEl: Element, options?: PureControllerOptions, keepContent = false) {
     this.target = targetEl as HTMLElement;
     this.options = options || {};
-    this.clear();
+    !keepContent && this.clear();
   }
   protected getOption(key: keyof PureControllerOptions) {
-    return this.options[key] || DEFALT_PURE_CONTROLLER_OPTIONS[key];
+    return this.options[key] || DEFAULT_PURE_CONTROLLER_OPTIONS[key];
   }
 
   clear() {

@@ -25,8 +25,9 @@
       toolbarController.add({
         status: 'TEMP_STATUS',
         handlePen: () => console.log('switch to drawing line mode'),
-        handleShape: () => console.log('switch to drawing shape mode'),
-        handleColor: () => console.log('change pen color'),
+        handleShape: selectedShape => console.log(`switch to drawing [${selectedShape.type}] shape mode`),
+        // TODO: selectedShape 객체의 svg 필드 활용
+        handleColor: selectedColor => console.log(`pen color is now [${selectedColor}]`),
         onClear: () => console.log('clear canvas'),
       });
 
