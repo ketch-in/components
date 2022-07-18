@@ -26,6 +26,7 @@ export default class PureComponent {
     this.removeDelay = removeDelay;
 
     this.element = this.createElement("div");
+    this.element.classList.add("container");
   }
 
   protected setRemoveDelay(removeDelay: number) {
