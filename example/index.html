@@ -10,18 +10,18 @@
   </head>
   <body>
     <div id="app"></div>
+    <div id="toast"></div>
     <script>
       const root = document.querySelector("#app");
+      const toastRoot = document.querySelector("#toast");
       const { ToastController, SelectModalController, ModalController, ToolbarController } =
         window.ketchInComponents;
-      const toastController = new ToastController(root, { removeDelay: 2000 });
-      const selectController = new SelectModalController(root, {
-        removeDelay: 2000,
-      });
-      const modalController = new ModalController(root, {
-        removeDelay: 2000,
-      });
+      const toastController = new ToastController(toastRoot, { removeDelay: 2000 });
+      const selectController = new SelectModalController(root, { removeDelay: 2000 });
+      const modalController = new ModalController(root, { removeDelay: 2000 });
       const toolbarController = new ToolbarController(root, {});
+
+      /* 툴바 */
       toolbarController.add({
         status: 'TEMP_STATUS',
         handlePen: () => console.log('switch to drawing line mode'),
@@ -31,7 +31,8 @@
         onClear: () => console.log('clear canvas'),
       });
 
-      for (let i = 1; i < 10; i++) {
+      /* 토스트 */
+      for (let i = 1; i < 5; i++) {
         setTimeout(() => {
           const p = document.createElement("p");
           p.innerText = `Toast ${i} TEST`;
@@ -47,8 +48,10 @@
               console.log("456", i, item, action);
             },
           });
-        }, i * 100);
+        }, i * 500);
       }
+
+      /* 셀렉트-모달 */
       for (let i = 1; i < 3; i++) {
         setTimeout(() => {
           const p = document.createElement("p");
@@ -64,6 +67,7 @@
         }, i * 1000);
       }
 
+      /* 모달 */
       for (let i = 1; i < 3; i++) {
         setTimeout(() => {
           const p = document.createElement("p");
