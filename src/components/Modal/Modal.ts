@@ -36,7 +36,6 @@ export default class ModalComponent extends OverlayComponent {
     closeEl.classList.add("close");
     closeEl.onclick = async () => {
       await this.unmount();
-      console.log('close');
       this.onClose();
     };
     element.appendChild(closeEl);
