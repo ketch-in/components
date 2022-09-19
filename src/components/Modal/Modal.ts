@@ -1,24 +1,24 @@
-import PureComponent, { PureComponentProps } from "@/core/PureComponent";
+import { PureComponentProps } from "@/core/PureComponent";
+import OverlayComponent from "@/core/OverlayComponent";
 
 export interface ModalComponentProps extends PureComponentProps {
   children: HTMLElement;
-  onClose?: (item: ModalComponent) => number | void;
+  onClose?: (item: OverlayComponent) => number | void;
 }
 
-export default class ModalComponent extends PureComponent {
+export default class ModalComponent extends OverlayComponent {
   private children: HTMLElement;
 
   private onClose: () => number | void;
 
   constructor({
     children,
-    removeDelay,
+    modalWidth,
     data = {},
     onClose = () => {},
   }: ModalComponentProps) {
-    super({ data, removeDelay, defaultClassName: "modal" });
+    super({ data, modalWidth, defaultClassName: "modal" });
     this.children = children;
-
     this.onClose = () => onClose(this);
   }
 
@@ -34,9 +34,10 @@ export default class ModalComponent extends PureComponent {
     /** TODO : 닫기 아이콘으로 변경 예정 */
     closeEl.innerText = "닫기";
     closeEl.classList.add("close");
-    closeEl.onclick = () => {
-      closeEl.onclick = () => {};
-      this.unmount().then(this.onClose);
+    closeEl.onclick = async () => {
+      await this.unmount();
+      console.log('close');
+      this.onClose();
     };
     element.appendChild(closeEl);
 

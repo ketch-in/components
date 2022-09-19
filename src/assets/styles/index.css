@@ -81,6 +81,13 @@
   min-height: 64px;
   z-index: 501;
 }
+.ketch-in-components.container.modal,
+.ketch-in-components.container.select-modal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
 
 .ketch-in-components.body, .ketch-in-components.text {
   align-items: center;
@@ -235,4 +242,15 @@
 .ketch-in-components.btn.yes {
   background-color: #1a73e8;
   color: #fff;
+}
+
+.ketch-in-overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.25);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }

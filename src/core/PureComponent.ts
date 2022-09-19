@@ -4,6 +4,7 @@ type State = "mount" | "unmount" | "unmounting";
 
 export interface PureComponentProps {
   data?: unknown;
+  modalWidth?: number;
   removeDelay?: number;
   defaultClassName?: string;
 }
@@ -13,29 +14,21 @@ export default class PureComponent {
   private state: State;
   private element: HTMLElement;
   private defaultClassName: string;
-  private removeDelay: number;
+  private modalWidth: number;
 
   constructor({
     data,
     defaultClassName,
-    removeDelay = 2000,
+    modalWidth = 200,
   }: PureComponentProps) {
     this.data = data;
     this.state = "unmount";
     this.defaultClassName = defaultClassName || "";
-    this.removeDelay = removeDelay;
+
+    this.modalWidth = modalWidth;
 
     this.element = this.createElement("div");
     this.element.classList.add("container");
-  }
-
-  protected setRemoveDelay(removeDelay: number) {
-    this.removeDelay = removeDelay;
-    return this;
-  }
-
-  protected getRemoveDelay() {
-    return this.removeDelay;
   }
 
   protected createElement(tagName: string, options?: ElementCreationOptions) {
@@ -76,6 +69,10 @@ export default class PureComponent {
     return this.element;
   }
 
+  protected getWidth() {
+    return this.modalWidth;
+  }
+
   protected isMount() {
     return this.getState() === "mount";
   }
@@ -92,41 +89,21 @@ export default class PureComponent {
     if (!this.isUnmount()) {
       await this.unmount();
     }
-
-    this.element = this.createElement("div");
     return this;
   }
 
   protected async mount(target: HTMLElement) {
-    if (this.isMount()) {
-      await this.unmount();
-    }
     target.append(this.element);
     return this.setState("mount");
   }
 
-  protected unmount() {
-    return new Promise<this>((resolve) => {
-      if (!this.isMount()) {
-        const interval = setInterval(() => {
-          if (this.isUnmount()) {
-            clearInterval(interval);
-            return resolve(this);
-          }
-        }, 1000);
-      }
+  protected unmounting() {
+    this.setState("unmounting");
+  }
 
-      this.setState("unmounting");
-
-      setTimeout(() => {
-        if (this.element.parentElement) {
-          const parentElement = this.element.parentElement;
-          parentElement.removeChild(this.element);
-        }
-        this.setState("unmount")
-          .clear()
-          .then(() => resolve(this));
-      }, this.getRemoveDelay());
-    });
+  protected async unmount() {
+    this.element.remove();
+    this.setState("unmount");
+    return await this.clear();
   }
 }

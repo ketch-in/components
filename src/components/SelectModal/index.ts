@@ -9,6 +9,7 @@ export default class SelectModalController extends PureController {
   add(props: SelectModalComponentProps) {
     return new SelectModalComponent({
       ...props,
+      modalWidth: this.getOption("modalWidth"),
       removeDelay: this.getOption("removeDelay"),
     }).mount(this.target);
   }

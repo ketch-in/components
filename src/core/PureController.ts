@@ -1,9 +1,11 @@
 export interface PureControllerOptions {
   removeDelay?: number;
+  modalWidth?: number;
 }
 
 const DEFAULT_PURE_CONTROLLER_OPTIONS: PureControllerOptions = {
   removeDelay: 2000,
+  modalWidth: 200,
 };
 
 export default class PureController {

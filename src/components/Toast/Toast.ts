@@ -8,6 +8,7 @@ export interface ToastComponentProps extends MomentComponentProps {
 
 export default class ToastComponent extends MomentComponent {
   private children: HTMLElement;
+  private removeDelay: number;
 
   private onClick: (item: ToastComponent) => void;
   private onClose: (action: boolean) => number | void;
@@ -20,12 +21,22 @@ export default class ToastComponent extends MomentComponent {
     onClick = () => {},
     onClose = () => {},
   }: ToastComponentProps) {
-    super({ removeDelay, momentDelay, data, defaultClassName: "toast" });
+    super({ momentDelay, data, defaultClassName: "toast" });
 
     this.children = children;
+    this.removeDelay = removeDelay;
 
     this.onClick = onClick;
     this.onClose = (action) => onClose(this, action);
+  }
+
+  protected setRemoveDelay(removeDelay: number) {
+    this.removeDelay = removeDelay;
+    return this;
+  }
+
+  protected getRemoveDelay() {
+    return this.removeDelay;
   }
 
   mount(target: HTMLElement) {
@@ -61,14 +72,25 @@ export default class ToastComponent extends MomentComponent {
   }
 
   unmount(action: boolean = false) {
-    if (this.isMount()) {
-      const customDelay = this.onClose(action);
-      const delay = (
-        !!customDelay || customDelay === 0 ? customDelay : this.getRemoveDelay()
-      ) as number;
-      this.setRemoveDelay(delay);
-    }
+    return new Promise<this>((resolve) => {
+      if (this.isMount()) {
+        const customDelay = this.onClose(action);
+        const delay = (
+          !!customDelay || customDelay === 0 ? customDelay : this.getRemoveDelay()
+        ) as number;
+        this.setRemoveDelay(delay);
+      } else {
+        const interval = setInterval(() => {
+          if (this.isUnmount()) {
+            clearInterval(interval);
+            return resolve(this);
+          }
+        }, 1000);
+      }
 
-    return super.unmount();
+      this.unmounting();
+
+      setTimeout(async () => await super.unmount(), this.getRemoveDelay());
+    });
   }
 }
