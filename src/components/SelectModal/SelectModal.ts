@@ -1,4 +1,5 @@
-import PureComponent, { PureComponentProps } from "@/core/PureComponent";
+import { PureComponentProps } from "@/core/PureComponent";
+import OverlayComponent from "@/core/OverlayComponent";
 
 interface SelectModalButtonsInterface {
   [id: string]: string;
@@ -11,7 +12,7 @@ export interface SelectModalComponentProps extends PureComponentProps {
   onClose?: (item: SelectModalComponent) => number | void;
 }
 
-export default class SelectModalComponent extends PureComponent {
+export default class SelectModalComponent extends OverlayComponent {
   private children: HTMLElement;
   private buttons: SelectModalButtonsInterface;
 
@@ -26,12 +27,12 @@ export default class SelectModalComponent extends PureComponent {
   constructor({
     children,
     buttons,
-    removeDelay,
+    modalWidth,
     data = {},
     onClick = () => {},
     onClose = () => {},
   }: SelectModalComponentProps) {
-    super({ data, removeDelay, defaultClassName: "select-modal" });
+    super({ data, modalWidth, defaultClassName: "select-modal" });
 
     this.children = children;
     this.buttons = buttons;
@@ -44,8 +45,9 @@ export default class SelectModalComponent extends PureComponent {
     this.onClose = () => onClose(this);
   }
 
-  private click(id: string) {
-    return super.unmount().then(() => this.onClick(this, id, this.buttons[id]));
+  private async click(id: string) {
+    await super.unmount()
+    this.onClick(this, id, this.buttons[id]);
   }
 
   mount(target: HTMLElement) {
@@ -54,6 +56,7 @@ export default class SelectModalComponent extends PureComponent {
     const bodyEl = this.createElement("div");
     bodyEl.append(this.children);
     bodyEl.classList.add("body");
+    element.style.width = `${this.getWidth()}px`;
     element.appendChild(bodyEl);
 
     const closeEl = this.createElement("span");
@@ -75,10 +78,7 @@ export default class SelectModalComponent extends PureComponent {
       btn.classList.add(id);
       btn.classList.add("btn");
       btn.innerText = this.buttons[id];
-      btn.onclick = () => {
-        btn.onclick = () => {};
-        this.click(id);
-      };
+      btn.onclick = () => this.click(id);
       btnsEl.append(btn);
     });
 

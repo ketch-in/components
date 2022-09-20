@@ -17,8 +17,8 @@
       const { ToastController, SelectModalController, ModalController, ToolbarController } =
         window.ketchInComponents;
       const toastController = new ToastController(toastRoot, { removeDelay: 2000 });
-      const selectController = new SelectModalController(root, { removeDelay: 2000 });
-      const modalController = new ModalController(root, { removeDelay: 2000 });
+      const selectController = new SelectModalController(root, { removeDelay: 2000, modalWidth: 400 });
+      const modalController = new ModalController(root, { removeDelay: 2000, modalWidth: 200 });
       const toolbarController = new ToolbarController(root, {});
 
       /* 툴바 */
@@ -61,7 +61,6 @@
             buttons: { yes: "확인", no: "취소" },
             onClick: (item, id, label) => {
               console.log(item, id, label);
-              item.mount(document.body);
             },
           });
         }, i * 1000);
@@ -76,7 +75,6 @@
             children: p,
             onClose: (item) => {
               console.log(item);
-              item.mount(document.body);
             },
           });
         }, i * 1000);
