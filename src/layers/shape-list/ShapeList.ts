@@ -24,12 +24,12 @@ export default class ShapeListLayer extends PureComponent {
   mount(target: HTMLElement) {
     const targetEl = this.getElement();
     const wrapperList = this.createElement('ul');
-  
+
     Object.entries(SHAPE_SVG_CODES).map(([type, svg]) => {
       const item = this.createElement('li');
-      const shapeBtn = this.createSVGElement(20, 20);
+      const shapeBtn = this.createSVGElement(40, 40);
 
-      shapeBtn.style.backgroundColor = '#EEE';
+      // shapeBtn.style.backgroundColor = '#EEE';
       shapeBtn.style.borderRadius = '4px';
       shapeBtn.innerHTML = svg;
       shapeBtn.dataset.shape = type;
@@ -51,22 +51,20 @@ export default class ShapeListLayer extends PureComponent {
       }
     }
 
-    document.querySelector('.toolbar')?.addEventListener('click', 
-      e => {
-        const eTarget = e.target as HTMLElement;
-        if (!eTarget.contains(targetEl)) {
-          this.unmount().then(this.onClose);
-        }
+    document.querySelector('.toolbar')?.addEventListener('click', e => {
+      const eTarget = e.target as HTMLElement;
+      if (!eTarget.contains(targetEl)) {
+        this.unmount().then(this.onClose);
       }
-    );
+    });
 
     return super.mount(target);
   }
 
-  unMount() {
-    this.unmount();
+  unmount() {
+    return super.unmount();
   }
-  
+
   onClose() {
     document.body.onclick = null;
   }

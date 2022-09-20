@@ -149,29 +149,43 @@
   cursor: move;
 }
 
+.ketch-in-components.toolbar.active > svg {
+  fill: #1a73e8;
+}
 .ketch-in-components.toolbar.btn_pen {
   display: inline-block;
   margin-right: 12px;
 }
 
-.ketch-in-components.toolbar.select_shape {
+.ketch-in-components.toolbar.btn_shape,
+.ketch-in-components.toolbar.btn_palette {
   display: inline-block;
   margin-right: 12px;
 }
-.ketch-in-components.toolbar.select_shape > .container {
+.ketch-in-components.toolbar.btn_shape > .container,
+.ketch-in-components.toolbar.btn_palette > .container {
   position: absolute;
   margin-top: 12px;
   margin-left: -100px;
+  padding: 12px 10px 10px 10px;
+  min-height: inherit;
+}
+.ketch-in-components.toolbar.btn_shape > .container {
+  min-width: 204px;
+  padding-bottom: 0;
+}
+.ketch-in-components.toolbar.btn_palette > .container {
+  min-width: 267px;
+}
+.ketch-in-components.toolbar.btn_shape > .container li,
+.ketch-in-components.toolbar.btn_palette > .container li {
+  margin-left: 10px;
+  float: left;
 }
 
-.ketch-in-components.toolbar.palette {
-  display: inline-block;
-  margin-right: 12px;
-}
-.ketch-in-components.toolbar.palette > .container {
-  position: absolute;
-  margin-top: 12px;
-  margin-left: -100px;
+.ketch-in-components.toolbar.btn_shape > .container li svg {
+  width: 40px;
+  height: 40px;
 }
 
 .ketch-in-components.toolbar.btn_clear {

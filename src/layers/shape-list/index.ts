@@ -10,14 +10,13 @@ export default class ShapeListController extends PureController {
   open(props: ShapeListLayerProps) {
     this.layer = new ShapeListLayer({...props, removeDelay: 0})
     if (this.layer instanceof ShapeListLayer) {
-      return this.layer.mount(this.target);
+      this.layer.mount(this.target);
     }
-    return;
   }
-  
+
   close() {
     if (this.layer instanceof ShapeListLayer) {
-      return this.layer.unMount();
+      this.layer.unmount();
     }
   }
 }

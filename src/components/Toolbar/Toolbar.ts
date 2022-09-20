@@ -61,14 +61,14 @@ export default class ToolbarComponent extends PureComponent {
         <polygon points="0,220 59.34,213.86 6.143,160.661  "/>
       </svg>`;
 
-    shape.classList.add('select_shape');
+    shape.classList.add('btn_shape');
     shape.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
         <path fill="none" d="M0 0h24v24H0z"/>
         <path d="M5 8a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm14 0a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 14a3 3 0 1 1 0-6 3 3 0 0 1 0 6zM5 22a3 3 0 1 1 0-6 3 3 0 0 1 0 6zM9 4h6v2H9V4zm0 14h6v2H9v-2zM4 9h2v6H4V9zm14 0h2v6h-2V9z"/>
       </svg>`;
 
-    palette.classList.add('palette');
+    palette.classList.add('btn_palette');
     palette.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
         <rect width="24" height="24" opacity="0"/>
@@ -96,10 +96,20 @@ export default class ToolbarComponent extends PureComponent {
     // status.onmousemove
     // status.onmouseup
 
-    pen.onclick = this.handlePen;
+    const active = (activeEl: HTMLElement) => {
+      [pen, shape, palette, clear].filter(el => el !== activeEl).forEach(el => el.classList.remove('active'));
+      activeEl.classList.toggle('active');
+    };
+
+    pen.onclick = () => {
+      active(pen);
+      this.handlePen();
+    };
 
     shape.onclick = (event) => {
-      event.stopPropagation()
+      event.stopPropagation();
+      colorPaletteController.close();
+      active(shape);
       if (shape.children.length === 1) {
         shapeListController.open({
           onShapeSelect: (selectedShape: Shape) => this.handleShape(selectedShape),
@@ -110,7 +120,9 @@ export default class ToolbarComponent extends PureComponent {
     }
 
     palette.onclick = (event) => {
-      event.stopPropagation()
+      event.stopPropagation();
+      shapeListController.close();
+      active(palette);
       if (palette.children.length === 1) {
         colorPaletteController.open({
           onColorSelect: (selectedColor: string) => this.handleColor(selectedColor),
@@ -119,7 +131,11 @@ export default class ToolbarComponent extends PureComponent {
         colorPaletteController.close();
       }
     };
-    clear.onclick = this.onClear;
+
+    clear.onclick = () => {
+      active(clear);
+      this.onClear();
+    }
 
     return super.mount(target);
   }
