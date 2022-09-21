@@ -162,6 +162,9 @@
 .ketch-in-components.toolbar.active > svg {
   fill: #1a73e8;
 }
+.ketch-in-components.toolbar.btn_palette.active {
+  border-color: #1a73e8; 
+}
 .ketch-in-components.toolbar.btn_pen {
   display: inline-block;
   margin-right: 12px;

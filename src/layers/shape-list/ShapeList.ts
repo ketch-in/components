@@ -43,11 +43,13 @@ export default class ShapeListLayer extends PureComponent {
     wrapperList.classList.add('wrapper');
     targetEl.appendChild(wrapperList);
 
-    wrapperList.onclick = (e: MouseEvent) => {
-      const eTarget = e.target as HTMLElement;
+    wrapperList.onclick = (event) => {
+      event.stopPropagation();
+      const eTarget = event.target as HTMLElement;
       if (eTarget.closest('li')) {
         const curShape = eTarget.dataset.shape as SHAPE_LABEL;
-        curShape && this.onShapeSelect({type: curShape, svg: SHAPE_SVG_CODES[curShape]});
+        if (curShape) this.onShapeSelect({type: curShape, svg: SHAPE_SVG_CODES[curShape]});
+        this.unmount();
       }
     }
 
@@ -66,6 +68,6 @@ export default class ShapeListLayer extends PureComponent {
   }
 
   onClose() {
-    document.body.onclick = null;
+
   }
 }
