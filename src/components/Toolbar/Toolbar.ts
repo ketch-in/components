@@ -73,7 +73,6 @@ export default class ToolbarComponent extends PureComponent {
       if (activeEl !== palette) {
         [pen, shape, palette, clear].filter(el => el !== activeEl).forEach(el => el.classList.remove('active'));
       }
-      console.log(forceActive)
       const isActive = activeEl.classList.contains('active');
       if (forceActive === true || !isActive) {
         activeEl.classList.add('active');
