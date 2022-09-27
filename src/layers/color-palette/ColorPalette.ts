@@ -27,29 +27,29 @@ export default class ColorPaletteLayer extends PureComponent {
       colorBtn.style.width = '27px';
       colorBtn.style.height = '27px';
       colorBtn.style.display = 'inline-block'
-      
+
       colorBtn.classList.add('color-unit');
       colorBtn.dataset.color = color;
       colorBtn.style.backgroundColor = color;
 
       item.classList.add(`btn-${color}`);
       item.appendChild(colorBtn);
-      
+
       wrapperList.appendChild(item);
     });
 
     wrapperList.classList.add('wrapper');
     targetEl.appendChild(wrapperList);
 
-    wrapperList.onclick = (e: MouseEvent) => {
-      const eTarget = e.target as HTMLElement;
+    wrapperList.onclick = (event) => {
+      const eTarget = event.target as HTMLElement;
       if (eTarget.closest('li')) {
         const curColor = eTarget.dataset.color;
-        curColor && this.onColorSelect(curColor);
+        if (curColor) this.onColorSelect(curColor);
       }
     }
 
-    document.querySelector('.toolbar')?.addEventListener('click', 
+    document.querySelector('.toolbar')?.addEventListener('click',
       e => {
         const eTarget = e.target as HTMLElement;
         if (!eTarget.contains(targetEl)) {
@@ -64,7 +64,7 @@ export default class ColorPaletteLayer extends PureComponent {
   unMount() {
     this.unmount();
   }
-  
+
   onClose() {
     document.body.onclick = null;
   }
