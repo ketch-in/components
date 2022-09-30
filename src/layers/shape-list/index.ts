@@ -1,4 +1,4 @@
-import PureController, { PureControllerOptions } from "@/core/PureController";
+import PureController, { PureControllerOptions } from "../../core/PureController";
 import ShapeListLayer, { ShapeListLayerProps } from "./ShapeList";
 
 export default class ShapeListController extends PureController {

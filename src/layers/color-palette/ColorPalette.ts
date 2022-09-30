@@ -1,4 +1,4 @@
-import PureComponent, { PureComponentProps } from "@/core/PureComponent";
+import PureComponent, { PureComponentProps } from "../../core/PureComponent";
 import { COLOR_LIST } from "./constants";
 
 export interface ColorPaletteLayerProps extends PureComponentProps {

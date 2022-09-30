@@ -1,4 +1,4 @@
-import PureController, { PureControllerOptions } from "@/core/PureController";
+import PureController, { PureControllerOptions } from "../../core/PureController";
 import ToastComponent, { ToastComponentProps } from "./Toast";
 
 export default class ToastController extends PureController {
