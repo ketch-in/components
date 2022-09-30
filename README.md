@@ -56,7 +56,7 @@ for (let i = 1; i < 5; i++) {
 ```ts
 const root = document.querySelector("#app");
 const { ToolbarController } = window.ketchInComponents;
-ToolbarController(root, {});
+const toolbarController = new ToolbarController(root, {});
 
 toolbarController.add({
   status: 'KetchIn',
