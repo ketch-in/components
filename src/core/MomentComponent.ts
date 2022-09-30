@@ -29,7 +29,7 @@ export default class MomentComponent extends PureComponent {
       .mount(target)
       .then(() =>
         this.setMomentTimeout(
-          setTimeout(() => this.unmount(), this.momentDelay)
+          window.setTimeout(() => this.unmount(), this.momentDelay)
         )
       );
   }

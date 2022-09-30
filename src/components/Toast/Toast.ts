@@ -1,4 +1,4 @@
-import MomentComponent, { MomentComponentProps } from "@/core/MomentComponent";
+import MomentComponent, { MomentComponentProps } from "../../core/MomentComponent";
 
 export interface ToastComponentProps extends MomentComponentProps {
   children: HTMLElement;

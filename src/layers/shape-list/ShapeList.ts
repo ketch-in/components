@@ -1,4 +1,4 @@
-import PureComponent, { PureComponentProps } from "@/core/PureComponent";
+import PureComponent, { PureComponentProps } from "../../core/PureComponent";
 import { SHAPE_LABEL, SHAPE_SVG_CODES } from "./constants";
 
 export interface Shape {

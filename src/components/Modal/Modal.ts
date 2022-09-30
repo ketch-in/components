@@ -1,5 +1,5 @@
-import { PureComponentProps } from "@/core/PureComponent";
-import OverlayComponent from "@/core/OverlayComponent";
+import { PureComponentProps } from "../../core/PureComponent";
+import OverlayComponent from "../../core/OverlayComponent";
 
 export interface ModalComponentProps extends PureComponentProps {
   children: HTMLElement;
