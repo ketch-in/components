@@ -1,4 +1,4 @@
-import { createElement } from "@/utils";
+import { createElement } from "../utils";
 
 type State = "mount" | "unmount" | "unmounting";
 

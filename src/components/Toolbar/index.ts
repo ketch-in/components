@@ -1,4 +1,4 @@
-import PureController, { PureControllerOptions } from "@/core/PureController";
+import PureController, { PureControllerOptions } from "../../core/PureController";
 import ToolbarComponent, { ToolbarComponentProps } from "./Toolbar";
 
 export default class ToolbarController extends PureController {
