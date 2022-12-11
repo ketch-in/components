@@ -1,4 +1,5 @@
-import PureController, { PureControllerOptions } from "../../core/PureController";
+import PureController, { PureControllerOptions } from "@/core/PureController";
+
 import ColorPaletteLayer, { ColorPaletteLayerProps } from "./ColorPalette";
 
 export default class ColorPaletteController extends PureController {
@@ -8,7 +9,7 @@ export default class ColorPaletteController extends PureController {
   }
 
   open(props: ColorPaletteLayerProps) {
-    this.layer = new ColorPaletteLayer({...props, removeDelay: 0})
+    this.layer = new ColorPaletteLayer({ ...props, removeDelay: 0 });
     if (this.layer instanceof ColorPaletteLayer) {
       return this.layer.mount(this.target);
     }

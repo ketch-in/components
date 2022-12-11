@@ -1,5 +1,5 @@
-import { PureComponentProps } from "../../core/PureComponent";
-import OverlayComponent from "../../core/OverlayComponent";
+import { PureComponentProps } from "@/core/PureComponent";
+import OverlayComponent from "@/core/OverlayComponent";
 
 interface SelectModalButtonsInterface {
   [id: string]: string;
@@ -46,7 +46,7 @@ export default class SelectModalComponent extends OverlayComponent {
   }
 
   private async click(id: string) {
-    await super.unmount()
+    await super.unmount();
     this.onClick(this, id, this.buttons[id]);
   }
 

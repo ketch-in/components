@@ -1,4 +1,4 @@
-import MomentComponent, { MomentComponentProps } from "../../core/MomentComponent";
+import MomentComponent, { MomentComponentProps } from "@/core/MomentComponent";
 
 export interface ToastComponentProps extends MomentComponentProps {
   children: HTMLElement;
@@ -76,7 +76,9 @@ export default class ToastComponent extends MomentComponent {
       if (this.isMount()) {
         const customDelay = this.onClose(action);
         const delay = (
-          !!customDelay || customDelay === 0 ? customDelay : this.getRemoveDelay()
+          !!customDelay || customDelay === 0
+            ? customDelay
+            : this.getRemoveDelay()
         ) as number;
         this.setRemoveDelay(delay);
       } else {
@@ -90,7 +92,7 @@ export default class ToastComponent extends MomentComponent {
 
       this.unmounting();
 
-      setTimeout(async () => await super.unmount(), this.getRemoveDelay());
+      setTimeout(() => super.unmount(), this.getRemoveDelay());
     });
   }
 }
