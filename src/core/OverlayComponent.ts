@@ -3,22 +3,23 @@ import PureComponent, { PureComponentProps } from "./PureComponent";
 export default class OverlayComponent extends PureComponent {
   private overlay: HTMLElement;
 
-  constructor({
-    data,
-    defaultClassName,
-  }: PureComponentProps) {
-    super({ data, defaultClassName, removeDelay: 0 });
+  constructor({ data, modalWidth, defaultClassName }: PureComponentProps) {
+    super({ data, modalWidth, defaultClassName, removeDelay: 0 });
     const overlay = this.getOverlay();
     this.overlay = overlay;
   }
 
   protected getOverlay() {
-    const overlay = document.body.querySelector(".ketch-in-overlay") as HTMLDivElement;
+    const overlay = document.body.querySelector(
+      ".ketch-in-overlay"
+    ) as HTMLDivElement;
     return overlay;
   }
 
   protected existModal() {
-    const modal = document.body.querySelector(".ketch-in-components.select-modal,.ketch-in-components.modal");
+    const modal = document.body.querySelector(
+      ".ketch-in-components.select-modal,.ketch-in-components.modal"
+    );
     return !!modal;
   }
 
