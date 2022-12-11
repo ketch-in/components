@@ -63,7 +63,7 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
         working-directory: ${{ env.BUILD_PATH }}
       - name: Build with Storybook
-        run: ${{ steps.detect-package-manager.outputs.runner }} build-storybook"
+        run: ${{ steps.detect-package-manager.outputs.runner }} build-storybook
         working-directory: ${{ env.BUILD_PATH }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
