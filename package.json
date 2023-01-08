@@ -7,11 +7,10 @@
   "typings": "./dist/index.d.ts",
   "type": "module",
   "scripts": {
-    "build": "npm run build:common && npm run build:types && npm run build:css",
+    "build": "npm run build:common && npm run build:types",
     "prebuild:common": "esbuild --outdir=dist --platform=node --format=cjs src/*.ts --sourcemap --bundle",
     "build:common": "esbuild --out-extension:.js=.mjs --outdir=dist --platform=node --format=esm src/*.ts --sourcemap --bundle",
     "build:types": "tsc --emitDeclarationOnly --declaration --project tsconfig.json",
-    "build:css": "cp ./src/index.css ./dist/index.css",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
