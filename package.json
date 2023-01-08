@@ -20,6 +20,10 @@
     "url": "git+https://github.com/ketch-in/ketch-in-components.git"
   },
   "author": "Sotaneum <gnyontu39@gmail.com>",
+  "contributors": [
+    "firejune <firejune@gmail.com>",
+    "jiyoon127"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/ketch-in/ketch-in-components/issues"
