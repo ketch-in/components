@@ -1,5 +1,10 @@
 <h1 align="center">KETCH IN COMPONENTS</h1>
 
+<p align="center">
+  <a href="./LICENSE"><img src="https://img.shields.io/npm/l/@ketch-in/components?style=flat-square" title="license"/></a>
+  <a href="https://www.npmjs.com/package/@ketch-in/components"><img src="https://img.shields.io/npm/v/@ketch-in/components?style=flat-square" title="npm-version"/></a>
+</p>
+
 ## Features
 
 - Toast UI
