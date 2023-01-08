@@ -1,6 +1,6 @@
 {
   "name": "@ketch-in/components",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "components for ketch-in",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
