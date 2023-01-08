@@ -5,6 +5,7 @@
   <a href="https://www.npmjs.com/package/@ketch-in/components"><img src="https://img.shields.io/npm/v/@ketch-in/components?style=flat-square" title="npm-version"/></a>
   <a href="https://ketch-in.github.io/ketch-in-components" target="_blank"><img src="https://raw.githubusercontent.com/storybooks/brand/master/badge/badge-storybook.svg"></a>
   <br />
+  <a href="https://github.com/ketch-in/ketch-in-components/actions/workflows/npm-publish.yml"><img src="https://github.com/ketch-in/ketch-in-components/actions/workflows/npm-publish.yml/badge.svg" title="Node.js Package" /></a>
   <a href="https://github.com/ketch-in/ketch-in-components/actions/workflows/storybook.yml"><img src="https://github.com/ketch-in/ketch-in-components/actions/workflows/storybook.yml/badge.svg" title="Deploy Storybook site to Pages" /></a>
 </p>
 
