@@ -1,4 +1,6 @@
-import PureController, { PureControllerOptions } from "@/core/PureController";
+import PureController, {
+  PureControllerOptions,
+} from "../../core/PureController";
 
 import ColorPaletteLayer, { ColorPaletteLayerProps } from "./ColorPalette";
 

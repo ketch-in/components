@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "declaration": true,
     "lib": ["es6", "dom", "dom.iterable", "es2017.object"],
     "module": "es6",
@@ -8,10 +9,7 @@
     "sourceMap": true,
     "strict": true,
     "target": "es6",
-    "outDir": "./dist",
-    "paths": {
-      "@/*": ["./src/*"]
-    }
+    "outDir": "./dist"
   },
   "include": ["src/**/*.ts"],
   "exclude": ["dist", "node_modules", "src/**/*.stories.ts"]

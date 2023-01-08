@@ -1,8 +1,8 @@
-import PureComponent, { PureComponentProps } from "@/core/PureComponent";
+import PureComponent, { PureComponentProps } from "../../core/PureComponent";
 
-import ColorPaletteController from "@/layers/color-palette";
-import ShapeListController from "@/layers/shape-list";
-import { Shape } from "@/layers/shape-list/ShapeList";
+import ColorPaletteController from "../../layers/color-palette";
+import ShapeListController from "../../layers/shape-list";
+import { Shape } from "../../layers/shape-list/ShapeList";
 
 export interface ToolbarComponentProps extends PureComponentProps {
   status: string; // TODO: status type 설정

@@ -2,10 +2,16 @@
   "name": "@ketch-in/components",
   "version": "0.1.1",
   "description": "components for ketch-in",
-  "main": "dist/index.js",
-  "private": false,
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "typings": "./dist/index.d.ts",
+  "type": "module",
   "scripts": {
-    "build": "tsc",
+    "build": "npm run build:common && npm run build:types && npm run build:css",
+    "prebuild:common": "esbuild --outdir=dist --platform=node --format=cjs src/*.ts --sourcemap --bundle",
+    "build:common": "esbuild --out-extension:.js=.mjs --outdir=dist --platform=node --format=esm src/*.ts --sourcemap --bundle",
+    "build:types": "tsc --emitDeclarationOnly --declaration --project tsconfig.json",
+    "build:css": "cp ./src/index.css ./dist/index.css",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
@@ -38,7 +44,9 @@
     "stylus": "^0.59.0",
     "typescript": "^4.9.4"
   },
-  "dependencies": {},
+  "dependencies": {
+    "esbuild": "0.16.15"
+  },
   "keywords": [
     "component"
   ]
