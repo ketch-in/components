@@ -5,14 +5,15 @@
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "typings": "./dist/index.d.ts",
-  "type": "module",
   "scripts": {
-    "build": "npm run build:common && npm run build:types",
+    "clean": "rm -rf dist",
+    "build": "npm run clean && npm run build:common && npm run build:types",
     "prebuild:common": "esbuild --outdir=dist --platform=node --format=cjs src/*.ts --sourcemap --bundle",
     "build:common": "esbuild --out-extension:.js=.mjs --outdir=dist --platform=node --format=esm src/*.ts --sourcemap --bundle",
     "build:types": "tsc --emitDeclarationOnly --declaration --project tsconfig.json",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "publish": "npm run build && npm publish --access public"
   },
   "repository": {
     "type": "git",
