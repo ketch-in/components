@@ -6,7 +6,6 @@
   <a href="https://ketch-in.github.io/ketch-in-components" target="_blank"><img src="https://raw.githubusercontent.com/storybooks/brand/master/badge/badge-storybook.svg"></a>
   <br />
   <a href="https://github.com/ketch-in/ketch-in-components/actions/workflows/npm-publish.yml"><img src="https://github.com/ketch-in/ketch-in-components/actions/workflows/npm-publish.yml/badge.svg" title="NPM Package" /></a>
-  <a href="https://github.com/ketch-in/ketch-in-components/actions/workflows/npm-publish-github-packages.yml"><img src="https://github.com/ketch-in/ketch-in-components/actions/workflows/npm-publish-github-packages.yml/badge.svg" title="Github Package" /></a>
   <a href="https://github.com/ketch-in/ketch-in-components/actions/workflows/storybook.yml"><img src="https://github.com/ketch-in/ketch-in-components/actions/workflows/storybook.yml/badge.svg" title="Deploy Storybook site to Pages" /></a>
 </p>
 
